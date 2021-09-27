@@ -1,0 +1,4 @@
+composer require jimmyjs/laravel-report-generator
+composer require barryvdh/laravel-snappy
+
+composer require h4cc/wkhtmltopdf-i386 0.12.x

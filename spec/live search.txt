@@ -1,0 +1,5 @@
+https://www.cloudways.com/blog/live-search-laravel-ajax/
+
+category : https://lukasmarkevicius.com/blog/how-to-create-categories-and-subcategories-using-laravel
+
+https://demo.phppointofsale.com/

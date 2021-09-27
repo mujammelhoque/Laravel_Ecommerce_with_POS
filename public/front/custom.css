@@ -1,0 +1,12 @@
+.bgsecton {
+    width: 100%;
+    height: 56vh;
+    opacity: 0.5;
+}
+.bgsecton h1 {
+    bottom: 0;
+    position: relative;
+    top: 37%;
+    left: 46%;
+    font-size: 50px;
+}

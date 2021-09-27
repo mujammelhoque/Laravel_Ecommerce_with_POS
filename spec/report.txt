@@ -1,0 +1,3 @@
+https://github.com/Jimmy-JS/laravel-report-generator
+
+https://github.com/barryvdh/laravel-snappy

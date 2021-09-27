@@ -1,0 +1,419 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<base href="http://localhost/OpenSourcePOS3.0.2/public/" />
+	<title>Open Source Point of Sale | Powered by OSPOS 3.0.2</title>
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="dist/bootswatch/flatly/bootstrap.min.css"/>
+
+			<!--[if lte IE 8]>
+		<link rel="stylesheet" media="print" href="dist/print.css" type="text/css" />
+		<![endif]-->
+		<!-- start mincss template tags -->
+		<link rel="stylesheet" type="text/css" href="dist/jquery-ui.css"/>
+		<link rel="stylesheet" type="text/css" href="dist/opensourcepos.min.css?rel=d5b9522f2f"/>
+		<link rel="stylesheet" type="text/css" href="dist/style.css"/>
+		<!-- end mincss template tags -->
+		<!-- start minjs template tags -->
+		<script type="text/javascript" src="dist/opensourcepos.min.js?rel=bc5842b19a"></script>
+		<!-- end minjs template tags -->
+	
+	<script type="text/javascript">
+	// live clock
+	var clock_tick = function clock_tick() {
+		setInterval('update_clock();', 1000);
+	}
+
+	// start the clock immediatly
+	clock_tick();
+
+	var update_clock = function update_clock() {
+		document.getElementById('liveclock').innerHTML = moment().format("MM/DD/YYYY HH:mm:ss");
+	}
+
+	$.notifyDefaults({ placement: {
+		align: 'center',
+		from: 'bottom'
+	}});
+
+	var post = $.post;
+
+	var csrf_token = function() {
+		return Cookies.get('csrf_cookie_ospos_v3');
+	};
+
+	var csrf_form_base = function() {
+		return { csrf_ospos_v3 : function () { return csrf_token();  } };
+	};
+
+	$.post = function() {
+		arguments[1] = $.extend(arguments[1], csrf_form_base());
+		post.apply(this, arguments);
+	};
+
+	var setup_csrf_token = function() {
+		$('input[name="csrf_ospos_v3"]').val(csrf_token());
+	};
+
+	setup_csrf_token();
+
+	$.ajaxSetup({
+		dataFilter: function(data) {
+			setup_csrf_token();
+			return data;
+		}
+	});
+
+	var submit = $.fn.submit;
+
+	$.fn.submit = function() {
+		setup_csrf_token();
+		submit.apply(this, arguments);
+	};
+
+	session_sha1 = '4f5ad57';
+
+</script>
+	<script type="text/javascript">
+(function(lang, $) {
+
+    var lines = {
+        'common_submit' : "Submit",
+        'common_close' : "Close"
+    };
+
+    $.extend(lang, {
+        line: function(key) {
+            return lines[key];
+        }
+    });
+
+
+})(window.lang = window.lang || {}, jQuery);
+</script>
+	<style type="text/css">
+		html {
+			overflow: auto;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="topbar">
+			<div class="container">
+				<div class="navbar-left">
+					<div id="liveclock">08/12/2021 12:37:36</div>
+				</div>
+				
+				<div class="navbar-right" style="margin:0">
+					Open Source Point of Sale  |  John Doe  |  					<a href="http://localhost/OpenSourcePOS3.0.2/public/home/logout">Logout</a>				</div>
+			</div>
+		</div>
+
+		<div class="navbar navbar-default" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+			
+					<a class="navbar-brand hidden-sm" href="http://localhost/OpenSourcePOS3.0.2/public/">OSPOS</a>
+				</div>
+
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+												<li class="">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/customers" title="Customers" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/customers.png" border="0" alt="Module Icon" /><br />
+								Customers							</a>
+						</li>
+												<li class="">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/items" title="Items" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/items.png" border="0" alt="Module Icon" /><br />
+								Items							</a>
+						</li>
+												<li class="">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/item_kits" title="Item Kits" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/item_kits.png" border="0" alt="Module Icon" /><br />
+								Item Kits							</a>
+						</li>
+												<li class="">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/suppliers" title="Suppliers" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/suppliers.png" border="0" alt="Module Icon" /><br />
+								Suppliers							</a>
+						</li>
+												<li class="">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/reports" title="Reports" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/reports.png" border="0" alt="Module Icon" /><br />
+								Reports							</a>
+						</li>
+												<li class="active">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/receivings" title="Receivings" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/receivings.png" border="0" alt="Module Icon" /><br />
+								Receivings							</a>
+						</li>
+												<li class="">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/sales" title="Sales" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/sales.png" border="0" alt="Module Icon" /><br />
+								Sales							</a>
+						</li>
+												<li class="">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/employees" title="Employees" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/employees.png" border="0" alt="Module Icon" /><br />
+								Employees							</a>
+						</li>
+												<li class="">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/giftcards" title="Gift Cards" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/giftcards.png" border="0" alt="Module Icon" /><br />
+								Gift Cards							</a>
+						</li>
+												<li class="">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/messages" title="Messages" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/messages.png" border="0" alt="Module Icon" /><br />
+								Messages							</a>
+						</li>
+												<li class="">
+							<a href="http://localhost/OpenSourcePOS3.0.2/public/config" title="Store Config" class="menu-icon">
+								<img src="http://localhost/OpenSourcePOS3.0.2/public/images/menubar/config.png" border="0" alt="Module Icon" /><br />
+								Store Config							</a>
+						</li>
+											</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+	 
+
+
+<div id="register_wrapper">
+
+<!-- Top register controls -->
+
+	<form action="http://localhost/OpenSourcePOS3.0.2/public/receivings/change_mode" id="mode_form" class="form-horizontal panel panel-default" method="post" accept-charset="utf-8">
+<input type="hidden" name="csrf_ospos_v3" value="4a79d1948418fd5a833242e13e0ae345" />
+		<div class="panel-body form-group">
+			<ul>
+				<li class="pull-left first_li">
+					<label class="control-label">Receiving Mode</label>
+				</li>
+				<li class="pull-left">
+					<select name="mode" onchange="$('#mode_form').submit();" class="selectpicker show-menu-arrow" data-style="btn-default btn-sm" data-width="fit">
+<option value="receive" selected="selected">Receive</option>
+<option value="return">Return</option>
+</select>
+				</li>
+
+							</ul>
+		</div>
+	</form>
+	<form action="http://localhost/OpenSourcePOS3.0.2/public/receivings/add" id="add_item_form" class="form-horizontal panel panel-default" method="post" accept-charset="utf-8">
+<input type="hidden" name="csrf_ospos_v3" value="4a79d1948418fd5a833242e13e0ae345" />
+		<div class="panel-body form-group">
+			<ul>
+				<li class="pull-left first_li">
+					<label for="item", class='control-label'>
+													Find/Scan Item									
+					</label>
+				</li>
+				<li class="pull-left">
+					<input type="text" name="item" value="" id="item" class="form-control input-sm" size="50" tabindex="1"  />
+				</li>
+				<li class="pull-right">
+					<button id='new_item_button' class='btn btn-info btn-sm pull-right modal-dlg'
+						data-btn-new='New'
+						data-btn-submit='Submit'
+						data-href='http://localhost/OpenSourcePOS3.0.2/public/items/view'
+						title='New Item'>
+						<span class="glyphicon glyphicon-tag">&nbsp</span>New Item					</button>
+				</li>
+			</ul>
+		</div>
+	</form>	
+<!-- Receiving Items List -->
+
+	<table class="sales_table_100" id="register">
+		<thead>
+			<tr>
+				<th style="width:5%;">Delete</th>
+				<th style="width:45%;">Item Name</th>
+				<th style="width:10%;">Cost</th>
+				<th style="width:10%;">Qty.</th>
+				<th style="width:5%;"></th>
+				<th style="width:10%;">Disc %</th>
+				<th style="width:10%;">Total</th>
+				<th style="width:5%;">Update</th>
+			</tr>
+		</thead>
+
+		<tbody id="cart_contents">
+							<tr>
+					<td colspan='8'>
+						<div class='alert alert-dismissible alert-info'>There are no items in the cart</div>
+					</td>
+				</tr>
+					</tbody>
+	</table>
+</div>
+
+<!-- Overall Receiving -->
+
+<div id="overall_sale" class="panel panel-default">
+	<div class="panel-body">
+					<form action="http://localhost/OpenSourcePOS3.0.2/public/receivings/select_supplier" id="select_supplier_form" class="form-horizontal" method="post" accept-charset="utf-8">
+<input type="hidden" name="csrf_ospos_v3" value="4a79d1948418fd5a833242e13e0ae345" />
+				<div class="form-group" id="select_customer">
+					<label id="supplier_label" for="supplier" class="control-label" style="margin-bottom: 1em; margin-top: -1em;">Select Supplier (Optional)</label>
+					<input type="text" name="supplier" value="Start Typing supplier&#039;s name..." id="supplier" class="form-control input-sm"  />
+
+					<button id='new_supplier_button' class='btn btn-info btn-sm modal-dlg' data-btn-submit='Submit' data-href='http://localhost/OpenSourcePOS3.0.2/public/suppliers/view'
+							title='New Supplier'>
+						<span class="glyphicon glyphicon-user">&nbsp</span>New Supplier					</button>
+
+				</div>
+			</form>		
+		<table class="sales_table_100" id="sale_totals">
+			<tr>
+									<th style="width: 55%;">Total</th>
+					<th style="width: 45%; text-align: right;">$0.00</th>
+							</tr>
+		</table>
+
+			</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+    $("#item").autocomplete(
+    {
+		source: 'http://localhost/OpenSourcePOS3.0.2/public/receivings/item_search',
+    	minChars:0,
+       	delay:10,
+       	autoFocus: false,
+		select:	function (a, ui) {
+			$(this).val(ui.item.value);
+			$("#add_item_form").submit();
+			return false;
+		}
+    });
+
+    $('#item').focus();
+
+	$('#item').keypress(function (e) {
+		if (e.which == 13) {
+			$('#add_item_form').submit();
+			return false;
+		}
+	});
+
+	$('#item').blur(function()
+    {
+    	$(this).attr('value',"Start Typing item's name or scan barcode...");
+    });
+
+	$('#comment').keyup(function() 
+	{
+		$.post('http://localhost/OpenSourcePOS3.0.2/public/receivings/set_comment', {comment: $('#comment').val()});
+	});
+
+	$('#recv_reference').keyup(function() 
+	{
+		$.post('http://localhost/OpenSourcePOS3.0.2/public/receivings/set_reference', {recv_reference: $('#recv_reference').val()});
+	});
+
+	$("#recv_print_after_sale").change(function()
+	{
+		$.post('http://localhost/OpenSourcePOS3.0.2/public/receivings/set_print_after_sale', {recv_print_after_sale: $(this).is(":checked")});
+	});
+
+	$('#item,#supplier').click(function()
+    {
+    	$(this).attr('value','');
+    });
+
+    $("#supplier").autocomplete(
+    {
+		source: 'http://localhost/OpenSourcePOS3.0.2/public/suppliers/suggest',
+    	minChars:0,
+    	delay:10,
+		select: function (a, ui) {
+			$(this).val(ui.item.value);
+			$("#select_supplier_form").submit();
+		}
+    });
+
+	dialog_support.init("a.modal-dlg, button.modal-dlg");
+
+	$('#supplier').blur(function()
+    {
+    	$(this).attr('value',"Start Typing supplier's name...");
+    });
+
+    $("#finish_receiving_button").click(function()
+    {
+   		$('#finish_receiving_form').submit();
+    });
+
+    $("#cancel_receiving_button").click(function()
+    {
+    	if (confirm('Are you sure you want to clear this receiving? All items will cleared.'))
+    	{
+			$('#finish_receiving_form').attr('action', 'http://localhost/OpenSourcePOS3.0.2/public/receivings/cancel_receiving');
+    		$('#finish_receiving_form').submit();
+    	}
+    });
+
+	$("#cart_contents input").keypress(function(event)
+	{
+		if (event.which == 13)
+		{
+			$(this).parents("tr").prevAll("form:first").submit();
+		}
+	});
+
+	table_support.handle_submit = function(resource, response, stay_open)
+	{
+		if(response.success)
+		{
+			if (resource.match(/suppliers$/))
+			{
+				$("#supplier").attr("value",response.id);
+				$("#select_supplier_form").submit();
+			}
+			else
+			{
+				$("#item").attr("value",response.id);
+				if (stay_open)
+				{
+					$("#add_item_form").ajaxSubmit();
+				}
+				else
+				{
+					$("#add_item_form").submit();
+				}
+			}
+		}
+	}
+});
+
+</script>
+
+		</div>
+	</div>
+
+	<div id="footer">
+		<div class="jumbotron push-spaces">
+			<strong>You are using Open Source Point Of Sale Version  			3.0.2 - 4f5ad57</strong>.
+			Please visit my			<a href="https://github.com/jekkos/opensourcepos" target="_blank">website</a>
+			to learn the latest information about the project		</div>
+	</div>
+</body>
+</html>
