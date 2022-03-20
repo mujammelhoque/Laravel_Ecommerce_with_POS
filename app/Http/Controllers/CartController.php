@@ -82,7 +82,6 @@ class CartController extends Controller
         if ($request->isMethod('get')) {
             $quantity = 1;
         }
-        // return $quantity;
         $product = Items::where('id', $id)->first();
         if (Cookie::get('generate_cart_id')) {
             $tempusertoken = Cookie::get('generate_cart_id');

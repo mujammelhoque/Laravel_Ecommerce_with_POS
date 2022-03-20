@@ -18,9 +18,6 @@ class GiftcardController extends Controller
     }
     public function index()
     {
-        // if (Auth::user()->role == '5') {
-        //     return redirect()->back()->with('warning', 'You have No Permission');
-        // }
         $gift_cards = Giftcard::with('customer')->orderBy('id', 'DESC')->get();
         return view('giftcards.index', compact('gift_cards'));
     }
@@ -72,17 +69,6 @@ class GiftcardController extends Controller
         $gift_catd->save();
         return redirect()->to('/giftcards')->with('success', 'Card Added. your card Number: ' . $gift_catd->card_number . '');
 
-        //        $img = Image::make(public_path('public/uploads/gift_card/fsad.jpg'));
-        //        $img->text("12132121", 120, 100, function($font) {
-        //            $font->file(public_path('public/uploads/gift_card/CARDC___.TTF'));
-        //            $font->size(28);
-        //            $font->color('#4285F4');
-        //            $font->align('center');
-        //            $font->valign('bottom');
-        //            $font->angle(0);
-        //        });
-        //        $img->save(public_path('public/uploads/gift_card/'));
-        //        return "OK";
 
     }
     public function edit($id)

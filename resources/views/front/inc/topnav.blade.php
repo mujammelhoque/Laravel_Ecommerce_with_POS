@@ -2,10 +2,10 @@
     <div class="container">
         <ul class="contactinfo nav nav-pills">
             <li>
-                <i class="fa fa-phone"></i> +880 12458755
+                <i class="fa fa-phone"></i> +880 1850134450
             </li>
             <li>
-                <i class="fa fa-envelope"></i> admin@ecommpos.com
+                <i class="fa fa-envelope"></i> mujammelh111@gmail.com
             </li>
         </ul>
         <!-- Social links -->

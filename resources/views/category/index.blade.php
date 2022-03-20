@@ -52,6 +52,7 @@
                 </button>
             </div>
         @endif
+        <h5 class="text-dark text-center">  All categroy for create, edit, delete and update </h5>
 
           <div class="container py-3">
             {{-- modal.start --}}

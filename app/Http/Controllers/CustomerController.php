@@ -40,24 +40,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        /*
-,"gender"
-        ,"email"
-        ,"phone"
-        ,"address1"
-        ,"address2"
-        ,"city"
-        ,"state"
-        ,"zip"
-        ,"country"
-        ,"company"
-        ,"account"
-        ,"total"
-        ,"discount"
-        ,"taxable"
-        ,"comments"
-        */
+        
         $rules = [
 			'first_name' => 'required|string|min:3|max:255',
 			'last_name' => 'required|string|min:3|max:255',
@@ -102,9 +85,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        // $customer = Customer::find($customer);
-        //dd($customer);
-        //echo "edit called";
+     
         return view('customer.edit',compact('customer'));
     }
 

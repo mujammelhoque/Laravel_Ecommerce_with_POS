@@ -3,7 +3,7 @@
     <div class="container header-middle-cont">
         <div class="toplogo">
             <a href="{{ url('/') }}">
-                <img src="{{ asset('store.png') }} " alt="Round 45 Store">
+                <em class="text-primary">IsDB BISEW</em> <img src="{{ asset('store.png') }} " alt="Round 45 Store">
             </a>
         </div>
         <div class="shop-menu">

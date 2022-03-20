@@ -7,7 +7,7 @@
         <div class="fr-slider">
             <ul class="slides">
                 <li>
-                    <img src="{{ asset('front/img/front/slider/slide1.jpg') }}" alt="">
+                    <img src="{{ asset('front/img/front/slider/istockphoto-879172584-170667a.jpg') }}" alt="">
                     <div class="fr-slider-cont">
                         <h3>MEGA SALE -30%</h3>
                         <p>Winter collection for women's. <br>We all have choices for you. Check it out!</p>
@@ -17,7 +17,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="{{ asset('front/img/front/slider/slide2.jpg') }}" alt="">
+                    <img width="500px" src="{{ asset('front/img/front/slider/depositphotos_117591582-stock-illustration-summer-background-banner.jpg') }}" alt="">
                     <div class="fr-slider-cont">
                         <h3>NEW COLLECTION</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Aliquam consequuntur dolorem
@@ -28,7 +28,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="{{ asset('front/img/front/slider/slide3.jpg') }}" alt="">
+                    <img src="{{ asset('front/img/front/slider/pexels-photo-573130.jpeg') }}" alt="">
                     <div class="fr-slider-cont">
                         <h3>SUMMER TRENDS</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Aliquam consequuntur dolorem

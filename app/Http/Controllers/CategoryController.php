@@ -13,8 +13,7 @@ class CategoryController extends Controller
    
    public function __construct()
    {
-    // if(!$this->checkauth()) { return redirect("/");}
-    //dd(Auth::check());
+   
     $this->middleware("onlyadmin");
    }
 
@@ -26,7 +25,6 @@ class CategoryController extends Controller
     public function index()
     {
          $allCategories = Category::orderBy('id','DESC')->get();
-    //   $categories = Category::with('childs')->whereNull('parent_id')->get();
     $categories = Category::where('parent_id', '=', 0)->get();
 
 
@@ -56,14 +54,12 @@ class CategoryController extends Controller
     {
           $validatedData = $this->validate($request, [
                 'name'      => 'required',
-                // 'parent_id' => 'sometimes|nullable|numeric'
           ]);
      
     $input = $request->all();
     $input['parent_id'] = empty($input['parent_id']) ? 0 : $input['parent_id'];
     
     Category::create($input);
-    // return back()->with('success', 'New Category added successfully.');
     return redirect()->route('category.index')->withSuccess('You have successfully created a Category!');
 }
 
